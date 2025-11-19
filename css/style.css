@@ -814,11 +814,6 @@ input[type="file"]:focus-visible {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 }
 
-/* optional: give highlighted card a bit more pop */
-.pricing_grid .cta-block.is--highlight:hover {
-  transform: translateZ(80px) scale(1.035);
-}
-
 /* reduce motion on touch devices / small screens */
 @media (hover: none), (max-width: 768px) {
   .pricing_grid {
@@ -833,7 +828,6 @@ input[type="file"]:focus-visible {
 }
 
 /* footer code here  */
-
 /* :root{
   --bg1:#241342; --bg2:#2a1552;          
   --glow1:#7b3bb5; --glow2:#4b2f86;      

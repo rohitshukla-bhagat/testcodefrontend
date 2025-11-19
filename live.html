@@ -1,0 +1,4528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>All My Rankers• V&V</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="livestyle.css" />
+
+    <style>
+      /* Hide every Google Translate UI artifact */
+      #google_translate_element {
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        visibility: hidden !important;
+      }
+      .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+      }
+      .goog-te-gadget {
+        height: 0 !important;
+        overflow: hidden !important;
+      }
+      .goog-te-menu-frame,
+      .goog-te-balloon-frame,
+      #goog-gt-tt {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      } /* prevent page shift */
+      .goog-logo-link,
+      .goog-te-gadget span {
+        display: none !important;
+      }
+
+      :root {
+        --container: 1120px;
+        --radius-lg: 20px;
+        --radius-md: 16px;
+        --shadow: 0 8px 28px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+        --accent: #1faa55; /* emerald heading */
+        --muted: #667085;
+        --ink: #101828;
+        --card: #fff;
+        --divider: rgba(0, 0, 0, 0.09);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial;
+        color: var(--ink);
+        background: #f5f5f5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* ===== NAVBAR STRIP (with your provided BG) ===== */
+      .nav-wrap {
+        background: url("") center/cover no-repeat, #0b0b10;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .nav {
+        max-width: var(--container);
+        margin: 0 auto;
+        height: 64px;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #e9eef5;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+      }
+      .brand img {
+        height: 28px;
+        width: auto;
+        display: block;
+      }
+      .menu {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        opacity: 0.95;
+        font-size: 14px;
+      }
+      .menu a {
+        color: #e9eef5;
+        text-decoration: none;
+        position: relative;
+      }
+      .menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 2px;
+        background: transparent;
+        transition: background 0.2s ease;
+      }
+      .menu a:hover::after {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .lang {
+        display: flex;
+        gap: 8px;
+      }
+      .pill {
+        background: #ffd84d;
+        color: #191a1c;
+        font-weight: 700;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+
+      /* ===== PAGE WRAP ===== */
+      .wrap {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 24px 20px 0;
+        background: #fff;
+      }
+      .hero {
+        background: #fff;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        padding: 32px 22px 10px;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      }
+      .hero h1 {
+        margin: 6px 0 8px;
+        text-align: center;
+        color: #1c8d46; /* screenshot ka green tone */
+        font-size: clamp(28px, 3.2vw, 42px);
+        font-weight: 800;
+      }
+      .hero p {
+        margin: 0 auto;
+        text-align: center;
+        max-width: 820px;
+        color: #6b7280;
+        font-size: clamp(14px, 1.6vw, 16px);
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--divider);
+        opacity: 0.6;
+        margin: 18px 0;
+      }
+
+      /* ===== TERMS CARDS ===== */
+      .section {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 6px 20px 0;
+        background: #fff;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(16, 24, 40, 0.06);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 26px 26px;
+        margin: 16px 0 24px;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+        color: #1c8d46;
+        font-size: clamp(18px, 2.2vw, 22px);
+        font-weight: 800;
+      }
+      .card p {
+        margin: 0;
+        color: #4b5563;
+        font-size: clamp(14px, 1.9vw, 16px);
+      }
+
+      /* ===== STANDALONE NEXT BUTTON (just above footer, right side) ===== */
+      .next-bar {
+        max-width: var(--container);
+        margin: 6px auto 6px;
+        padding: 0 20px;
+        background: #fff;
+        text-align: right;
+      }
+      .btn-next {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #1c8d46;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 28px rgba(28, 141, 70, 0.28);
+      }
+      .btn-next:hover {
+        background: #166534;
+      }
+
+      /* ===== CTA + FOOTER (your purple blob image) ===== */
+      .cta-wrap {
+        margin-top: 24px;
+        background: #100e1b;
+      }
+      .cta-bg {
+        /* Use the provided footer image */
+        background: url("./images/bgimage1.png") center/cover no-repeat;
+        /* background-color: black; */
+      }
+      .cta {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 54px 20px 82px;
+        text-align: center;
+        color: #f0ecff;
+      }
+      .cta h2 {
+        margin: 0 0 10px;
+        font-weight: 800;
+        font-size: clamp(22px, 3vw, 34px);
+      }
+      .cta p.small {
+        margin: 0 auto;
+        max-width: 820px;
+        color: #cfd2ff;
+        opacity: 0.92;
+      }
+      .cta .btn {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        background: #1c8d46;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 32px rgba(28, 141, 70, 0.34);
+      }
+
+      .footer {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 20px 18px;
+        color: #d9dbff;
+        font-size: 13px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+        gap: 20px;
+      }
+      .footer h4 {
+        margin: 0 0 10px;
+        font-size: 13px;
+        opacity: 0.9;
+      }
+      .footer a {
+        color: #e9eaff;
+        text-decoration: none;
+        opacity: 0.85;
+      }
+      .social {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: inline-grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .copyright {
+        text-align: center;
+        opacity: 0.8;
+        margin-top: 10px;
+        padding-bottom: 6px;
+      }
+
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 1024px) {
+        :root {
+          --container: 920px;
+        }
+        .footer-grid {
+          grid-template-columns: 1.2fr 1fr 1fr;
+          row-gap: 22px;
+        }
+      }
+      @media (max-width: 768px) {
+        :root {
+          --container: 680px;
+        }
+        .nav {
+          height: 58px;
+        }
+        .menu {
+          display: none;
+        } /* mobile: hide center menu like screenshot */
+        .lang .pill {
+          padding: 6px 9px;
+        }
+        .card {
+          padding: 20px;
+        }
+        .cta {
+          padding: 44px 16px 64px;
+        }
+      }
+      @media (max-width: 480px) {
+        :root {
+          --container: 520px;
+        }
+        .nav {
+          padding: 0 12px;
+        }
+        .hero {
+          padding: 24px 16px 8px;
+        }
+        .card {
+          padding: 16px 14px;
+          border-radius: var(--radius-md);
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* hide Google bar/widget (hum pills se control karenge) */
+      #google_translate_element {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+      }
+      .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      }
+    </style>
+  </head>
+
+  <body style="background-image: url(./images/liverankimage.png)">
+    <div id="google_translate_element"></div>
+
+    <!-- NAVBAR WITH PROVIDED BACKGROUND -->
+    <header class="nav-wrap">
+      <div class="nav">
+        <div class="brand">
+          <!-- optional logo image -->
+          <!-- <img src="./images/vv-logo.png" alt="V&V"> -->
+          <a href="index.html">
+            <img
+              src="./images/logo.png"
+              alt=""
+              style="width: 80px; height: 40px"
+            />
+          </a>
+        </div>
+
+        <nav class="menu" aria-label="Primary">
+          <a href="index.html">Testimonials ✨</a>
+          <a href="index.html">Courses</a>
+          <a href="index.html">Reviews</a>
+          <span class="live-inline">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="live-text"
+              ><a href="" style="color: white; font-weight: 400"
+                >Live Top Rankers</a
+              ></span
+            >
+          </span>
+          <a href="index.html">FAQs</a>
+        </nav>
+
+        <div class="lang">
+          <span class="pill">English</span>
+          <span class="pill">русский</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main>
+      <div class="vv-wrap">
+        <div class="vv-wrap">
+          <img
+            class="imagerankfrist"
+            src="./images/winner medal/winner medal/FRISTRANK.png"
+            alt=""
+            style="
+              width: 160px;
+              height: 140px;
+              position: relative;
+              top: -53px;
+              left: 480px;
+            "
+          />
+        </div>
+
+        <div class="vv-trophy vv-left">
+          <img
+            src="./images/gif/trofi_1.gif"
+            alt=""
+            width="200px"
+            height="200px"
+            style="position: relative; margin-left: 300px"
+          />
+        </div>
+        <div class="vv-trophy vv-right">
+          <img
+            src="./images/gif/trofi_1.gif"
+            alt=""
+            width="200px"
+            height="200px"
+            style="position: relative; margin-right: 300px"
+          />
+        </div>
+
+        <div class="vv-avatar">
+          <img
+            class="rankfristimageman"
+            src="./images/rankceo/1.png"
+            alt=""
+            width="400px"
+            height="450px"
+            style="position: relative; right: 93px; top: 83px"
+          />
+        </div>
+
+        <img class="gif" src="./images/rankkepichegif.gif" alt="" />
+      </div>
+      <!-- only mobile version  -->
+      <div class="mobile_version">
+        <div class="rank1">
+          <img
+            src="./images/winner medal/winner medal/FRISTRANK.png"
+            alt=""
+            style="
+              width: 163px;
+              height: 153px;
+              position: relative;
+              top: 33px;
+              left: 123px;
+            "
+          />
+        </div>
+        <div class="rank1man">
+          <img
+            src="./images/rankceo/1.png"
+            alt=""
+            style="
+              position: relative;
+              width: 350px;
+              height: 400px;
+              top: 43px;
+              left: 33px;
+            "
+          />
+        </div>
+        <div class="rank2">
+          <img
+            src="./images/winner medal/winner medal/SECONDRANK.png"
+            alt=""
+            style="
+              width: 163px;
+              height: 183px;
+              position: relative;
+              top: 33px;
+              left: 123px;
+            "
+          />
+        </div>
+        <div class="rank2man">
+          <img
+            src="./images/rankceo/2.png"
+            alt=""
+            style="
+              position: relative;
+              width: 350px;
+              height: 400px;
+              top: 43px;
+              left: 33px;
+            "
+          />
+        </div>
+        <div class="rank3">
+          <img
+            src="./images/winner medal/winner medal/THIRDRANK.png"
+            alt=""
+            style="
+              position: relative;
+              width: 180px;
+              height: 200px;
+              top: 43px;
+              left: 123px;
+            "
+          />
+        </div>
+        <div class="rank3man">
+          <img
+            src="./images/rankceo/3.png"
+            alt=""
+            style="
+              position: relative;
+              width: 350px;
+              height: 400px;
+              top: 43px;
+              left: 33px;
+            "
+          />
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div class="vv-wrap">
+        <div class="vv-badge">
+          <img
+            class="imagesecond"
+            src="./images/winner medal/winner medal/SECONDRANK.png"
+            alt=""
+            style="
+              width: 160px;
+              height: 170px;
+              position: relative;
+              top: -53px;
+              right: 210px;
+            "
+          />
+          <img
+            class="imagethird"
+            src="./images/winner medal/winner medal/THIRDRANK.png"
+            alt=""
+            style="
+              width: 160px;
+              height: 170px;
+              position: relative;
+              top: -53px;
+              right: -245px;
+            "
+          />
+        </div>
+
+        <div class="vv-trophy vv-left">
+          <img
+            src="./images/gif/udja.gif"
+            alt=""
+            width="150px"
+            height="150px"
+            style="position: relative; right: 36px; top: 180px"
+          />
+        </div>
+        <div class="vv-trophy vv-right">
+          <img
+            src="./images/gif/udta2.gif"
+            alt=""
+            width="150px"
+            height="150px"
+            style="position: relative; left: 42px; top: 180px"
+          />
+        </div>
+
+        <div class="vv-avatar1">
+          <img
+            src="./images/rankceo/2.png"
+            alt=""
+            width="400px"
+            height="450px"
+            style="position: relative; right: 23px"
+          />
+          <img
+            src="./images/rankceo/3.png"
+            alt=""
+            width="400px"
+            height="450px"
+            style="
+              position: relative;
+              margin-bottom: -430px;
+              left: 600px;
+              top: -455px;
+            "
+          />
+        </div>
+        <img class="gif2" src="./images/rankkepichegif.gif" alt="" />
+        <img class="gif3" src="./images/rankkepichegif.gif" alt="" />
+        <img class="gif4" src="./images/gif/medel.gif" alt="" />
+      </div>
+
+      <style>
+        .winners-marquee {
+          overflow: hidden;
+          width: 100%;
+          position: relative;
+          margin: 52px 0;
+        }
+        .winners-belt {
+          display: inline-flex;
+          will-change: transform;
+          animation: winners-scroll-left var(--speed, 12s) linear infinite; /* default: left */
+        }
+        .winners-belt--right {
+          animation: winners-scroll-right var(--speed, 12s) linear infinite; /* right scroll */
+        }
+        .winners-track {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          white-space: nowrap;
+        }
+        .winners-card {
+          width: 290px;
+          height: 170px;
+          object-fit: cover;
+          border-radius: 10px;
+          flex: 0 0 auto;
+        }
+
+        /* Left direction (←): 0 to -50% */
+        @keyframes winners-scroll-left {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        /* Right direction (→): -50% to 0 */
+        @keyframes winners-scroll-right {
+          from {
+            transform: translateX(-50%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        .winners-marquee:hover .winners-belt,
+        .winners-marquee:hover .winners-belt--right {
+          animation-play-state: paused; /* optional pause on hover */
+        }
+
+        @media (max-width: 768px) {
+          .winners-card {
+            width: 220px;
+            height: 130px;
+          }
+        }
+        @media (max-width: 520px) {
+          .winners-card {
+            width: 180px;
+            height: 110px;
+          }
+        }
+      </style>
+
+      <div class="vv-avatar2">
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/2.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/3.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/4.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/5.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/6.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/7.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/8.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/9.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/10.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/11.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/12.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/13.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/14.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/15.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/16.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/17.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/18.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/19.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/20.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/21.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/22.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/23.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/24.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/25.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/26.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/27.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/28.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/29.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/30.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/31.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/32.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/33.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/34.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/35.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/36.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/37.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/38.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/39.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/40.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/41.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/42.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/44.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/45.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/44.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/45.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/44.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/45.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/44.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/45.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/44.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/45.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/46.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/47.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/48.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/49.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Ranker2to50/50.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/51.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/52.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/53.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/54.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/55.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/56.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/57.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/58.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/59.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/60.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/61.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/62.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/63.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/64.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/65.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/66.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/67.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/68.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/69.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/70.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/71.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/72.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/73.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/74.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/75.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/75.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/76.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/77.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/78.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/79.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/80.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/81.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/82.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/83.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/84.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/85.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/86.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/87.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/88.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/89.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 2 (Right scroll) ========= -->
+        <!-- Speed alag rakhna ho to --speed change kar sakte ho, jaise 10s/16s -->
+        <div class="winners-marquee" style="--speed: 12s">
+          <div class="winners-belt winners-belt--right">
+            <div class="winners-track">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/90.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/91.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/92.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/93.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/94.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/95.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/96.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/97.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/98.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/90.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/91.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/92.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/93.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/94.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/95.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/96.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/97.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/98.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/90.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/91.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/92.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/93.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/94.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/95.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/96.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/97.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/98.png"
+                alt=""
+              />
+            </div>
+            <div class="winners-track" aria-hidden="true">
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/90.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/91.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/92.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/93.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/94.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/95.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/96.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/97.png"
+                alt=""
+              />
+              <img
+                class="winners-card"
+                src="./images/Rankers50t0100/98.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ========= ROW 1 (Left scroll) ========= -->
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <!-- CTA + FOOTER WITH PROVIDED FOOTER IMAGE -->
+      <footer
+        class="vv-footer"
+        style="background-image: url(./images/bgimage1.png)"
+      >
+        <!-- CTA -->
+        <div class="vv-cta">
+          <h2 style="color: white; font-weight: 700">Ready to grow with us?</h2>
+          <p style="color: white">
+            If you're interested in learning, earning, and transforming your
+            future with V&V, one of our advisors will guide you.
+          </p>
+          <a href="#get-started" class="vv-btn" style="color: white"
+            >Get started</a
+          >
+        </div>
+
+        <!-- Footer content -->
+        <div class="vv-wrap">
+          <div class="col brand">
+            <img
+              src="./images/logo.png"
+              alt=""
+              style="width: 100px; height: 50px"
+            />
+          </div>
+
+          <div class="col">
+            <h4>COURSES</h4>
+            <ul>
+              <li>
+                <a href="#" style="font-size: 14.5px">Agripreneur Lite</a>
+              </li>
+              <li><a href="#" style="font-size: 14.5px">Agripreneur Pro</a></li>
+              <li>
+                <a href="#" style="font-size: 14.5px">Mega Agripreneur</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h4>ABOUT</h4>
+            <ul>
+              <li><a href="#" style="font-size: 14.5px">Our Mission</a></li>
+              <li><a href="#" style="font-size: 14.5px">Our Story</a></li>
+              <li><a href="#" style="font-size: 14.5px">Careers</a></li>
+              <li>
+                <a href="#" style="font-size: 14.5px"
+                  >India–Russia Collaboration</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h4>SUPPORT</h4>
+            <ul>
+              <li><a href="#" style="font-size: 14.5px">FAQs</a></li>
+              <li><a href="#" style="font-size: 14.5px">Contact Us</a></li>
+              <li><a href="#" style="font-size: 14.5px">Student Login</a></li>
+            </ul>
+          </div>
+
+          <div class="col">
+            <h4>LEGAL</h4>
+            <ul>
+              <li>
+                <a
+                  href="updatep.html"
+                  style="font-size: 14.5px; white-space: nowrap"
+                  >Terms &amp; Conditions</a
+                >
+              </li>
+              <li>
+                <a href="disclemer.html" style="font-size: 14.5px"
+                  >Disclaimer</a
+                >
+              </li>
+              <li>
+                <a href="licence.html" style="font-size: 14.5px"
+                  >End User License</a
+                >
+              </li>
+              <li>
+                <a href="refund.html" style="font-size: 14.5px">Refund</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col social">
+            <h4>FOLLOW US</h4>
+            <div class="icons">
+              <a aria-label="Facebook" href="#"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a aria-label="X" href="#"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a aria-label="Instagram" href="#"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a aria-label="LinkedIn" href="#"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="vv-copy" style="color: white">
+          © 2025 V&V Agro Global LLP. All rights reserved
+        </div>
+      </footer>
+
+      <style>
+        .vv-avatar2 {
+          width: 100vw !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+          align-items: center !important;
+        }
+        .vv-copy {
+          text-align: center !important;
+        }
+
+        .vv-footer {
+          position: relative;
+          isolation: isolate;
+          color: var(--ink);
+          overflow: hidden;
+          padding-top: 64px;
+          background: radial-gradient(
+              1200px 600px at 15% 10%,
+              rgba(255, 255, 255, 0.06),
+              transparent 60%
+            ),
+            radial-gradient(
+              900px 500px at 85% 20%,
+              rgba(0, 0, 0, 0.25),
+              transparent 60%
+            ),
+            linear-gradient(
+              90deg,
+              var(--violet-deep) 0%,
+              #3b2376 40%,
+              #2c1a6a 60%,
+              var(--violet-deep) 100%
+            );
+        }
+
+        /* abstract blobs (like screenshot) */
+        .vv-footer::before,
+        .vv-footer::after {
+          content: "";
+          position: absolute;
+          inset: auto -15% -18% -15%;
+          height: 70%;
+          /* background:
+      radial-gradient(58% 70% at 20% 90%, #0e0b1a 0 60%, transparent 62%) 0 100%/60% 70% no-repeat,
+      radial-gradient(60% 80% at 90% 30%, #0e0b1a 0 64%, transparent 66%) 100% 30%/60% 70% no-repeat; */
+          opacity: 0.9;
+          z-index: 0;
+        }
+        .vv-footer::before {
+          inset: auto -10% -35% -10%;
+          filter: blur(2px);
+        }
+
+        /* CTA */
+        .vv-cta {
+          text-align: center;
+          max-width: 920px;
+          margin: 0 auto 40px;
+          padding: 0 16px;
+          position: relative;
+          z-index: 1;
+        }
+        .vv-cta h2 {
+          font-size: clamp(28px, 4vw, 54px);
+          line-height: 1.05;
+          margin: 0 0 12px;
+          font-weight: 800;
+          letter-spacing: 0.2px;
+        }
+        .vv-cta p {
+          margin: 0 auto 20px;
+          max-width: 720px;
+          color: var(--muted);
+        }
+        .vv-btn {
+          display: inline-block;
+          padding: 12px 22px;
+          background: linear-gradient(180deg, var(--btn), #1fa650);
+          color: #08130a;
+          border-radius: 10px;
+          font-weight: 700;
+          text-decoration: none;
+          box-shadow: 0 0 0 10px rgba(52, 199, 89, 0.08),
+            0 6px 30px rgba(52, 199, 89, 0.35);
+          transition: transform 0.18s ease, box-shadow 0.2s ease;
+        }
+        .vv-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 0 0 12px rgba(52, 199, 89, 0.1),
+            0 10px 36px rgba(52, 199, 89, 0.45);
+        }
+
+        /* Grid */
+        .vv-wrap {
+          position: relative;
+          z-index: 1;
+          max-width: 1200px;
+          margin: 40px auto 28px;
+          padding: 0 20px 10px;
+          display: grid;
+          grid-template-columns: 1.1fr repeat(4, 1fr) 1.2fr;
+          gap: 28px 40px;
+          align-items: start;
+        }
+
+        .col h4 {
+          font-size: 12px;
+          letter-spacing: 0.18em;
+          color: #e9e5ff;
+          margin: 0 0 12px;
+        }
+        .col ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .col li {
+          margin: 10px 0;
+        }
+        .col a {
+          color: #e7e7f4;
+          text-decoration: none;
+        }
+        .col a:hover {
+          text-decoration: underline;
+        }
+
+        /* brand */
+        .brand .logo {
+          font-family: "Georgia", "Times New Roman", serif;
+          font-size: 54px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: 0.02em;
+          color: #fff;
+        }
+
+        /* social */
+        .social .icons {
+          display: flex;
+          gap: 14px;
+        }
+        .social .icons a {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          background: rgba(255, 255, 255, 0.1);
+          color: #e9e9f7;
+          font-size: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          transition: transform 0.15s ease, background 0.2s ease,
+            border-color 0.2s ease;
+        }
+        .social .icons a:hover {
+          transform: translateY(-2px);
+          background: rgba(255, 255, 255, 0.18);
+          border-color: rgba(255, 255, 255, 0.26);
+        }
+
+        /* copyright */
+        .vv-copy {
+          position: relative;
+          z-index: 1;
+          padding: 18px 22px 36px;
+          color: #b7b7c8;
+          font-size: 13px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+          .vv-wrap {
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+          }
+          .brand {
+            grid-column: 1 / -1;
+          }
+        }
+        @media (max-width: 640px) {
+          .vv-cta {
+            margin-bottom: 24px;
+          }
+          .vv-wrap {
+            grid-template-columns: 1fr;
+          }
+          .brand .logo {
+            font-size: 42px;
+          }
+          .social .icons a {
+            width: 38px;
+            height: 38px;
+            font-size: 15px;
+          }
+          .vv-copy {
+            padding-bottom: 28px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          /* One column + center all columns */
+          .vv-wrap {
+            grid-template-columns: 1fr;
+            justify-items: center;
+          }
+
+          /* Center headings + lists for every col (brand & social included) */
+          .vv-wrap .col {
+            width: 100%;
+            text-align: center !important;
+          }
+
+          /* Make UL full-center (override earlier inline-block/left rules) */
+          .vv-wrap .col ul {
+            display: block !important;
+            margin: 0 auto;
+            padding: 0;
+            text-align: center !important;
+          }
+
+          /* Neat spacing and no bullets */
+          .vv-wrap .col li {
+            list-style: none;
+            margin: 8px 0;
+          }
+
+          /* Allow long links to wrap (fixes ABOUT’s last item) */
+          .vv-wrap .col a {
+            white-space: normal !important;
+          }
+
+          /* Brand logo centered */
+          .vv-wrap .brand img {
+            display: block;
+            margin: 0 auto;
+          }
+
+          /* Social icons row centered */
+          .vv-wrap .social .icons {
+            justify-content: center;
+            width: 100%;
+          }
+        }
+      </style>
+    </main>
+
+    <!-- (your existing vv48 timer script – untouched) -->
+    <script>
+      (function () {
+        const ROOT = document.getElementById("vv48");
+        if (!ROOT) return;
+        const HOURS = +ROOT.dataset.hours || 48;
+        const DURATION = HOURS * 60 * 60 * 1000;
+        const KEY = (ROOT.id || "vv48") + "_start_at";
+        function setStart(t) {
+          try {
+            localStorage.setItem(KEY, String(t));
+          } catch (e) {
+            document.cookie =
+              KEY +
+              "=" +
+              encodeURIComponent(String(t)) +
+              "; max-age=" +
+              Math.ceil(DURATION / 1000) +
+              "; path=/; SameSite=Lax";
+          }
+        }
+        function getCookie(name) {
+          if (!document.cookie) return null;
+          const parts = document.cookie.split("; ");
+          for (const part of parts) {
+            const eq = part.indexOf("=");
+            if (eq < 0) continue;
+            const k = part.slice(0, eq);
+            if (k === name) return decodeURIComponent(part.slice(eq + 1));
+          }
+          return null;
+        }
+        function getStart() {
+          try {
+            const v = localStorage.getItem(KEY);
+            if (v !== null) return Number(v);
+          } catch (e) {}
+          const c = getCookie(KEY);
+          return c ? Number(c) : null;
+        }
+        function clearStart() {
+          try {
+            localStorage.removeItem(KEY);
+          } catch (e) {}
+          document.cookie = KEY + "=; max-age=0; path=/; SameSite=Lax";
+        }
+        let start = getStart();
+        if (!start || isNaN(start)) {
+          start = Date.now();
+          setStart(start);
+        }
+        const end = start + DURATION;
+        const dd = ROOT.querySelector(".dd");
+        const hh = ROOT.querySelector(".hh");
+        const mm = ROOT.querySelector(".mm");
+        const ss = ROOT.querySelector(".ss");
+        const pad = (n) => String(n).padStart(2, "0");
+        let tmo;
+        function render() {
+          const now = Date.now();
+          let left = Math.max(0, end - now);
+          if (left <= 0) {
+            if (dd) dd.textContent = "00";
+            if (hh) hh.textContent = "00";
+            if (mm) mm.textContent = "00";
+            if (ss) ss.textContent = "00";
+            return;
+          }
+          const days = Math.floor(left / 86400000);
+          left -= days * 86400000;
+          const hours = Math.floor(left / 3600000);
+          left -= hours * 3600000;
+          const mins = Math.floor(left / 60000);
+          left -= mins * 60000;
+          const secs = Math.floor(left / 1000);
+          if (dd) dd.textContent = pad(days);
+          if (hh) hh.textContent = pad(hours);
+          if (mm) mm.textContent = pad(mins);
+          if (ss) ss.textContent = pad(secs);
+          clearTimeout(tmo);
+          tmo = setTimeout(render, 1000 - (Date.now() % 1000) + 2);
+        }
+        window.addEventListener("storage", (e) => {
+          if (e.key === KEY) location.reload();
+        });
+        window.vv48Reset = () => {
+          clearStart();
+          location.reload();
+        };
+        render();
+      })();
+    </script>
+
+    <!-- ===== NEXT BUTTON ACTION: scroll to CTA ===== -->
+    <script>
+      document.getElementById("nextBtn")?.addEventListener("click", () => {
+        document
+          .querySelector(".cta")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    </script>
+
+    <!-- ===== GOOGLE TRANSLATE (English / Russian pills) + NAV/PILL I18N ===== -->
+    <script>
+      // Called by Google script tag at the bottom
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,ru",
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      }
+
+      // Wait until the language <select> is injected
+      function getGtSelect(cb, tries = 0) {
+        const sel = document.querySelector("select.goog-te-combo");
+        if (sel) return cb(sel);
+        if (tries > 60) return; // ~6s timeout
+        setTimeout(() => getGtSelect(cb, tries + 1), 100);
+      }
+
+      // Trigger translation without showing Google UI
+      function switchLang(langCode) {
+        getGtSelect((sel) => {
+          if (sel.value === langCode) return;
+          sel.value = langCode;
+          // fire both native & legacy events for widest support
+          sel.dispatchEvent(new Event("change"));
+          if (typeof sel.fireEvent === "function") sel.fireEvent("onchange");
+        });
+      }
+
+      // Hook pills
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".lang .pill").forEach((pill) => {
+          pill.addEventListener("click", () => {
+            const lang = pill.dataset.lang || "en";
+            switchLang(lang);
+          });
+        });
+      });
+    </script>
+
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  </body>
+</html>
