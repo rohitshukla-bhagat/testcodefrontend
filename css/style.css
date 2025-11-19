@@ -2339,3 +2339,8 @@ input[type="file"]:focus-visible {
     height: 1400px !important;
   }
 }
+@media screen and (width < 300px) {
+  .cta_block_first {
+    height: 2000px !important;
+  }
+}
