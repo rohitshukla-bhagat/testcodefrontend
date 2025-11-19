@@ -2323,6 +2323,9 @@ input[type="file"]:focus-visible {
   .cta_block_first {
     height: 1500px !important;
   }
+  .mainImg{
+    width: 300px !important;
+  }
 }
 
 @media screen and (width > 768px) {
