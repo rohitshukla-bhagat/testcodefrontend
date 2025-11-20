@@ -60,7 +60,7 @@
 <link rel="preconnect" href="https://vandvagro.com" crossorigin>
 <link rel="dns-prefetch" href="//vandvagro.com">
 
-
+<!-- Critical CSS inline (केवल ऊपर-के-फोल्ड का ~6-8KB) -->
 <style>
 :root{--ink:#101828;--bg:#fff}
 html{scroll-behavior:smooth}
@@ -72,16 +72,16 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
 @media (max-width:900px){.hero{grid-template-columns:1fr}}
 </style>
 
-
+<!-- मुख्य CSS फ़ाइल defer करें -->
 <link rel="preload" as="style" href="/assets/app.min.css">
 <link rel="stylesheet" href="/assets/app.min.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/assets/app.min.css"></noscript>
 
-
+<!-- Web fonts: render blocking न बनें -->
 
 <style>@font-face{font-family:"Inter";src:url(/assets/fonts/Inter-Variable.woff2) format("woff2");font-display:swap}</style>
 
-
+<!-- HERO LCP इमेज high-priority -->
 
 
 
@@ -91,7 +91,7 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
 <style>
   /* ===== Scroll indicator theme ===== */
   #vv-scroll{
-    --vv-fg: #ffffff;               
+    --vv-fg: #ffffff;               /* icon color (white) */
     --vv-shadow: rgba(0,0,0,.35);   /* soft shadow for visibility */
     position: fixed;
     right: 18px;
@@ -169,23 +169,25 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
 
 
   #vv-scroll{
-    --vv-scale: 1.25;               
+    --vv-scale: 1.25;                 /* 1.1 = थोड़ा, 1.25 = noticeable, 1.4 = बड़ा */
     transform: scale(var(--vv-scale));
-    transform-origin: bottom right;   
+    transform-origin: bottom right;   /* corner से grow करे */
   }
-  
+  /* hide state में भी scale बना रहे */
   #vv-scroll.hide{
     transform: translateY(6px) scale(var(--vv-scale));
   }
 
- 
+  /* Mobile पर थोड़ा कम/ज्यादा कर सकते हो */
   @media (max-width: 575.98px){
-    #vv-scroll{ --vv-scale: 1.45; }   
+    #vv-scroll{ --vv-scale: 1.45; }    /* चाहो तो 1.3 भी कर सकते हो */
   }
 
   
 
 </style>
+
+
 <script>
   (function(){
     const box = document.getElementById('vv-scroll');
@@ -207,7 +209,7 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
       onScroll();
     }, {passive:true});
 
-    
+    // if canvas animates at top, keep it visible; then hide when user scrolls
     onScroll();
   })();
 </script>
@@ -223,7 +225,7 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
 <section id="pm-popup">
   <style>
 
-    
+    /* === Overlay === */
     #pm-popup-overlay {
       position: fixed;
       inset: 0;
@@ -326,49 +328,82 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
       transition: background 0.3s;
     }
 
-    /* ======================================
-       📱=== RESPONSIVE MOBILE FIX ===📱
-    ====================================== */
+    
     @media (max-width: 768px) { 
 
-      .pm-popup-box {
-        height: auto;
-        padding: 20px 10px;
-        align-items: center;
-      }
+  .pm-popup-box {
+    width: 500px;
+    height: 680px;
+    padding: 0;
+    background-image: url("/mobileimage.png") !important;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;  
+    border-radius: 12px;
+    overflow: hidden;
+  }
 
-      .pm-form {
-        width: 100%;
-        right: 0 !important;
-        top: 0 !important;
-        margin: 0;
-        padding: 18px;
-        max-width: 100%;
-        border-radius: 12px;
-      }
+  /* Mobile Form - Background Removed */
+  .pm-form {
+    width: 90%;
+    max-width: 90%;
+    
+    background: none !important;      /* ❌ White BG Removed */
+   
+    
+    margin-bottom: 25px;
+    padding: 18px;
+    border-radius: 10px;
+    position: relative;
+    right: 0 !important;
+    top: 0 !important;
+    box-shadow: none !important;      /* ❌ Shadow removed (optional) */
+  }
 
-      .pm-form input {
-        flex: 1 1 100%;
-      }
+  .pm-form input {
+  flex: none !important;
+  width: 230px !important;   /* ← अब width काफी कम कर दी */
+  height: 32px !important;   /* Height भी छोटी */
+  padding: 5px 8px;
+  font-size: 13px;
+  border-radius: 6px; 
+  position: relative;
+  right: 43px;
+  top: -110px; 
+  border-color:green;
+}
 
-      .pm-form button {
-        flex: 1 1 100%;
-        font-size: 17px;
-        padding: 14px 10px;
-      }
 
-      /* ❌ Removed: display:block !important; */
-    }
 
-    @media (max-width: 480px) {
-      .pm-popup-box {
-        width: 95%;
-      }
-      .pm-close-btn {
-        top: 10px;
-        right: 10px;
-      }
-    }
+  .pm-form button {
+    flex: none !important;       
+    width: 120px !important;      /* ← Smaller width */
+    height: 38px !important;      /* ← Smaller height */
+    
+    padding: 6px 10px !important; /* Button padding reduced */
+    font-size: 14px !important;   /* Smaller text */
+    border-radius: 20px !important;
+
+    position: relative;
+    top: -110px;
+    right: 33px;
+}
+
+
+  .pm-close-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pm-popup-box {
+    width: 95%;
+  }
+}
+
+
 
   </style>
 
@@ -429,17 +464,10 @@ h1{font-weight:800;line-height:1.1;margin:0 0 8px}
     setTimeout(() => {
       closePopupBtn.style.display = "block";
     }, 20000);
-  </script>
+  </script> 
+
+
 </section>
-
-
-
-
-
-
-<!-- mobile profile ke liye  -->
-
-
 
 
 
@@ -1032,7 +1060,8 @@ a[nav-link="active"] *{
 
 
 
-
+/* (mobile rules aapke paas already hain; wahan hover disable hi rehne do) */
+/* ===== MOBILE: no peek + image not cut ===== */
 @media (max-width: 768px){
 
   /* Slider container: no side padding, no gap → next card hide */
@@ -1297,12 +1326,12 @@ a[nav-link="active"] *{
 
 @media (max-width: 1024px) {
   .agri-section {
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap; /* सभी कार्ड एक ही row में */
     justify-content: space-around;
   }
 
   .agri-section ,.card1 ,.card2, .card3 {
-    width: 220px;   
+    width: 220px;   /* कार्ड छोटे कर दिए */
     height: 180px;
   } 
   .agri-section ,.card1{ 
@@ -1603,7 +1632,7 @@ a[nav-link="active"] *{
   
 }
 
-
+/* mobile पर hide */
 @media (max-width: 820px) {
   .arrow-img2 {
     display: none;
@@ -1948,12 +1977,19 @@ a[nav-link="active"] *{
                 <div class="pricing_header small-width">
                   <h2>Compare and Choose Your V&V Learning Path  ✨</h2>
                   <div class="users-block big">
-                    <div class="text-size-tiny is-big">Select a course plan that matches youcta-blockr goals — and begin your 36-month journey to knowledge, skills, and wealth.</div>
+                    <div class="text-size-tiny is-big">Select a course plan that matches your goals — and begin your 36-month journey to knowledge, skills, and wealth.</div>
                   </div>
                   <div class="spacer-huge is-small"></div>
-                </div>
-                <div class="pricing_grid">
-                  <div class="cta-block">
+                </div>      
+                <div class="pricing_grid"> 
+                   <style>
+                    .heightpro {
+                     height: 1250px !important;
+  
+                  }
+                   </style>
+                 
+                  <div class="cta-block heightpro">
                     <h3 class="cta_heading">Entrepreneur Pro </h3>
                     <div class="cta_bullet">
                       <div class="cta_list-wrap">
@@ -2151,7 +2187,7 @@ a[nav-link="active"] *{
 
                         <div class="cta_list-row">
                           <div id="w-node-_24b0610e-ce6f-e02c-8058-eb66b9f09a87-0939382f" class="cta_list-icon">
-                            <svg xmlns="http://www.w3.org/2000/s" width="16" height="16"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
      viewBox="0 0 24 24" fill="none" aria-hidden="true">
   <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
     <!-- exclusive star (top-left) -->
@@ -2195,16 +2231,16 @@ a[nav-link="active"] *{
 
                     <div class="cta_button-wrap">
                       
-                      <div class="cta_pric-block cta_pric_new">
+                      <div class="cta_pric-block">
                         
 
 
  </style>
                         
 
-                        <div class="rt-monitor" data-status="live" style=" right: -297px; top: 200px;">
+                        <div class="rt-monitor" data-status="live" style="position: relative; right: -297px; top: 200px;">
   
-                        <p style="color: white; position: relative; right: -1px;">Offer Ends In</p>
+  <p style="color: white; position: relative; right: -1px;">Offer Ends In</p>
    
   
   
@@ -2233,7 +2269,7 @@ a[nav-link="active"] *{
 }
 
 </style>    
-                             <h2 class="pricing_tag30" style="position: relative;  font-size: 40px; top: 40px; "><a class="pricing_tag30">3,00,000 </a></h2>
+                             <h2 class="pricing_tag30" style="position: relative;  font-size: 40px; top: 50px; "><a class="pricing_tag30">3,00,000 </a></h2>
 
                              <div id="vv485" class="deal485" data-hours="48" aria-live="polite">
                             <div class="cell"><div class="num dd" style="font-weight:bolder;">00</div><div class="lbl" style="font-family: 'Antonio'; font-size: 19px;">DAYS</div></div>
@@ -2378,7 +2414,7 @@ a[nav-link="active"] *{
                         <div class="text-size-tiny text-align-left">Designed for those who want to maximize their growth, network with leaders, and build full entrepreneurial capacity.
 
                         </div>
-                      </div>
+                      </div>  
                     </div>
                     <img src="./images/offerfrist.png" 
      class="promo-fade1" 
@@ -2412,20 +2448,20 @@ a[nav-link="active"] *{
                   <style>
                     .cta-block.is--highlight {
   
-  height: auto;
+ height: 1150px;
 }
 
 
-@media (min-width: 1024px) {
+@media (max-width: 604px) {
   .cta-block.is--highlight {
-    height: 1150px;
+    height: 1350px;
   }
 }
 
                   </style>
 
                   
-                  <div class="cta-block is--highlight cta_block_first">
+                  <div class="cta-block is--highlight">
                     <h3 class="cta_heading">Entrepreneur Lite</h3>
 
                                           <div class="cta_bullet">
@@ -2715,10 +2751,15 @@ a[nav-link="active"] *{
   
 
   <!-- IMAGE -->
+   <!-- IMAGE -->
   <div style=" position: relative; width: 697px; height: 400px; "> 
   <!-- IMAGE --> 
-   <img id="mainImg" src="./images/Blue and White Modern Laundry Gift Voucher A4/3.png" style=" position: relative; top: -30px; left: 150px; animation: autoZoom 1.5s ease-in-out infinite; transform: translate(-50%,-50%); opacity: 1; width: 400px; height: 350px; z-index: 1; filter: drop-shadow(0px 0px 10px white);"> </div>
+   <img id="mainImg" src="./images/Blue and White Modern Laundry Gift Voucher A4/3.png" style=" position: relative; top: -30px; left: 170px; animation: autoZoom 1.5s ease-in-out infinite; transform: translate(-50%,-50%); opacity: 1; width: 507px; height: 500px; z-index: 1; filter: drop-shadow(0px 0px 10px white);"> </div>
+
+
 <style>
+
+
 
 /* ZOOM ANIMATION */
 @keyframes autoZoom {
@@ -2747,19 +2788,15 @@ a[nav-link="active"] *{
     width: 220px;
     animation: autoZoom 1.5s ease-in-out infinite;
     position: relative;
-    top: 230px;
+    top: -70px !important;
 
   } 
   #mainImg{  
     position: relative !important;
-    width: 450px !important; 
-    left: 70px !important;
-  }
+    width: 400px !important; 
+    left: 45px !important;
+    height: 400px !important;
 
-}
-@media (max-width: 500px){
-    #mainImg{
-      left: 35px !important;
   }
 }
 </style>
@@ -2769,90 +2806,6 @@ a[nav-link="active"] *{
                                          
 
 
-
-
-                         <!-- <style> 
-.image_broucher::before {
-    content: "";
-    position: absolute;
-    transform: translate(-50%, -50%);
-    width: 479px ; 
-    height:200px; 
-    left: 1120px;
-    margin-top: -180px;
-    background: white;
-    border-radius: 50%;
-    filter: blur(30px);  
-    opacity: 70;       
-    z-index: -1;
-}
-  .image_broucher {
-     
-    display: flex;
-
-    margin-top: 10px;
-    
-
-    width: 299px;
-    height: 80px;
-    overflow: hidden;    
-    
-
-}
-
-
-.image_broucher img { 
-    position: absolute;               
-    top: 50%;                         
-    left: 50%;                        
-    transform: translate(-50%, -50%) scale(1);  
-
-   width: 570px;
-   height: 570px; 
-   margin-top: 1850px;
-   margin-left: 290px;
-    object-fit: cover;
-
-    animation: autoZoom 1.5s ease-in-out infinite;
-    transform-origin: center center;
-}
-
-
-@keyframes autoZoom {
-    0%   { transform: translate(-50%, -50%) scale(0.85); }
-    50%  { transform: translate(-50%, -50%) scale(1.03); }
-    100% { transform: translate(-50%, -50%) scale(0.85); }
-}
- 
-
-
-
-@media (max-width: 768px) { 
-
-    .image_broucher {
-        position: relative;
-        
-        
-        width: 100% !important;
-        height: auto !important;
-        overflow: visible !important;
-    }
-
-    /* >>> MOBILE me actual perfect display <<< */
-    .image_broucher img {
-        position: relative !important;
-        width: 200px !important;
-        height: 200px !important;
-        margin-top: -1650px;
-        margin-left: -10px;
-        animation: autoZoom 2s ease-in-out infinite;
-        border-radius: 0 0 30px 30px;
-    }
-}
-
-
-
-</style> -->
 
 
                        
@@ -2877,9 +2830,7 @@ a[nav-link="active"] *{
         </div>
       </section> 
 
-      <!-- <div class="image_broucher">
-    <img src="./images/Blue and White Modern Laundry Gift Voucher A4/3.png" alt="">
-</div> -->
+      
  
 
 
@@ -3056,7 +3007,400 @@ You’re free to cancel at any time, but once you do, your access to all courses
        <br><br><br> 
 
 
+<footer class="vv-footer" style="background-image: url(./images/bgimage1.png);">
+  <!-- CTA -->
+  <div class="vv-cta">
+    <h2 style="color: white; font-weight: 700;">Ready to grow with us?</h2>
+    <p style="color: white;">If you're interested in learning, earning, and transforming your future with V&V, one of our advisors will guide you.</p>
+    <a href="#get-started" class="vv-btn" style="color: white;">Get started</a>
+  </div>
 
+  <!-- Footer content -->
+  <div class="vv-wrap">
+    <div class="col brand">
+      <img src="./images/logo.png" alt="" style="width: 100px; height: 50px;">
+    </div>
+
+    <div class="col">
+      <h4>COURSES</h4>
+      <ul>
+        <li><a href="#" style="font-size: 14.5px;">Entrepreneur Lite</a></li>
+        <li><a href="#"style="font-size: 14.5px;">Entrepreneur Pro</a></li>
+        <li><a href="#"style="font-size: 14.5px;">Mega Entrepreneur</a></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h4>ABOUT</h4>
+      <ul>
+        <li><a href='about/'style="font-size: 14.5px;">About Us</a></li>
+        <li><a href="about/"style="font-size: 14.5px;">Our Mission</a></li>
+        <li><a href="about/"style="font-size: 14.5px;">Our Story</a></li>
+        <li><a href="#"style="font-size: 14.5px;">Careers</a></li>
+        <li><a href="#"style="font-size: 14.5px; ">India–Russia Collaboration</a></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h4>SUPPORT</h4>
+      <ul>
+        <li><a href="#"style="font-size: 14.5px;">FAQs</a></li>
+        <li><a href="#"style="font-size: 14.5px;">Contact Us</a></li> 
+        <li><a href="https://vandvagro.vandvagro.com/Auth/UserLogin"style="font-size: 14.5px;">Student Login</a></li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h4>LEGAL</h4>
+      <ul>
+        <li><a href="updatep.html"style="font-size: 14.5px;white-space:nowrap; ">Terms &amp; Conditions</a></li>
+         <li><a href="disclemer.html"style="font-size: 14.5px;">Disclaimer</a></li>
+          <li><a href="licence.html"style="font-size: 14.5px;">End User License</a></li>
+           <li><a href="refund.html"style="font-size: 14.5px;">Refund</a></li>
+      </ul>
+    </div>
+
+    <div class="col social">
+      <h4>FOLLOW US</h4>
+      <div class="icons">
+        <a aria-label="Facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a aria-label="X" href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a aria-label="Instagram" href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a aria-label="LinkedIn" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="vv-copy" style="color: white;">© 2025 V&V Agro Global LLP. All rights reserved</div>
+</footer>
+
+<style>
+  .vv-copy{
+  text-align: center !important;
+}
+
+
+  .vv-footer{
+    position: relative;
+    isolation:isolate;
+    color:var(--ink);
+    overflow:hidden;
+    padding-top:64px;
+    background:
+      radial-gradient(1200px 600px at 15% 10%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(900px 500px at 85% 20%, rgba(0,0,0,.25), transparent 60%),
+      linear-gradient(90deg, var(--violet-deep) 0%, #3b2376 40%, #2c1a6a 60%, var(--violet-deep) 100%);
+  }
+
+  
+  .vv-footer::before,
+  .vv-footer::after{
+    content:"";
+    position:absolute; inset:auto -15% -18% -15%;
+    height:70%;
+    opacity:.9;
+    z-index:0;
+  }
+  .vv-footer::before{
+    inset:auto -10% -35% -10%;
+    filter: blur(2px);
+  }
+
+  /* CTA */
+  .vv-cta{
+    text-align:center;
+    max-width:920px;
+    margin:0 auto 40px;
+    padding:0 16px;
+    position:relative;
+    z-index:1;
+  }
+  .vv-cta h2{
+    font-size: clamp(28px, 4vw, 54px);
+    line-height:1.05;
+    margin:0 0 12px;
+    font-weight:800;
+    letter-spacing:.2px;
+  }
+  .vv-cta p{
+    margin:0 auto 20px;
+    max-width:720px;
+    color:var(--muted);
+  }
+  .vv-btn{
+    display:inline-block;
+    padding:12px 22px;
+    background:linear-gradient(180deg, var(--btn), #1fa650);
+    color:#08130a;
+    border-radius:10px;
+    font-weight:700;
+    text-decoration:none;
+    box-shadow:0 0 0 10px rgba(52,199,89,.08), 0 6px 30px rgba(52,199,89,.35);
+    transition: transform .18s ease, box-shadow .2s ease;
+  }
+  .vv-btn:hover{ transform: translateY(-1px); box-shadow:0 0 0 12px rgba(52,199,89,.10), 0 10px 36px rgba(52,199,89,.45)}
+
+  
+  .vv-wrap{
+    position:relative;
+    z-index:1;
+    max-width:1200px;
+    margin:40px auto 28px;
+    padding:0 20px 10px;
+    display:grid;
+    grid-template-columns: 1.1fr repeat(4, 1fr) 1.2fr;
+    gap:28px 40px;
+    align-items:start;
+  }
+
+  .col h4{
+    font-size:12px;
+    letter-spacing:.18em;
+    color:#e9e5ff;
+    margin:0 0 12px;
+  }
+  .col ul{list-style:none; padding:0; margin:0}
+  .col li{margin:10px 0}
+  .col a{color:#e7e7f4; text-decoration:none}
+  .col a:hover{ text-decoration:underline }
+
+  /* brand */
+  .brand .logo{
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size:54px;
+    font-weight:700;
+    line-height:1;
+    letter-spacing:.02em;
+    color:#fff;
+  }
+
+  /* social */
+  .social .icons{ display:flex; gap:14px; }
+  .social .icons a{
+    width:42px; height:42px; border-radius:50%;
+    display:grid; place-items:center;
+    background:rgba(255,255,255,.1);
+    color:#e9e9f7; font-size:16px;
+    border:1px solid rgba(255,255,255,.14);
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .social .icons a:hover{ transform:translateY(-2px); background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.26) }
+
+  /* copyright */
+  .vv-copy{
+    position:relative; z-index:1;
+    padding:18px 22px 36px;
+    color:#b7b7c8;
+    font-size:13px;
+    max-width:1200px; margin:0 auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px){
+    .vv-wrap{
+      grid-template-columns: 1fr 1fr;
+      gap:28px;
+    }
+    .brand{ grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px){
+    .vv-cta{ margin-bottom: 24px; }
+    .vv-wrap{
+      grid-template-columns: 1fr;
+    }
+    .brand .logo{ font-size:42px; }
+    .social .icons a{ width:38px; height:38px; font-size:15px; }
+    .vv-copy{ padding-bottom:28px; }
+  }
+
+
+  @media (max-width: 640px){
+  /* One column + center all columns */
+  .vv-wrap{
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  /* Center headings + lists for every col (brand & social included) */
+  .vv-wrap .col{
+    width: 100%;
+    text-align: center !important;
+  }
+
+  /* Make UL full-center (override earlier inline-block/left rules) */
+  .vv-wrap .col ul{
+    display: block !important;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center !important;
+  }
+
+  /* Neat spacing and no bullets */
+  .vv-wrap .col li{
+    list-style: none;
+    margin: 8px 0;
+  }
+
+  /* Allow long links to wrap (fixes ABOUT’s last item) */
+  .vv-wrap .col a{
+    white-space: normal !important;
+  }
+
+  /* Brand logo centered */
+  .vv-wrap .brand img{
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Social icons row centered */
+  .vv-wrap .social .icons{
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+.os-copy p{
+  text-align: justify;           /* दोनों किनारों से बराबर */
+  text-align-last: justify;      /* आख़िरी लाइन भी justify */
+  text-justify: inter-word;      /* शब्दों के बीच spacing समायोजित */
+  hyphens: auto;                 /* बड़े शब्दों पर hyphenation (बेहतर spacing) */
+}
+
+
+
+/* put this after your existing CSS */
+.a3-text{
+  text-align: justify;
+  text-align-last: left !important;   /* या start */
+}
+
+/* tidy typography */
+.a3-text{ text-align: justify; text-align-last: left; line-height:1.9; }
+.a3-list{
+  margin:12px 0 0; padding-left:1.1rem;
+  list-style: disc;                    /* bullets */
+}
+.a3-list li{ margin:6px 0; line-height:1.9; text-align:left; }
+
+
+
+/* Our Story → paragraph alignment fix */
+.os-copy{ text-align: left; }                 /* center inherit ko override */
+.os-copy p{
+  margin: 0;
+  line-height: 1.9;
+  text-align: justify;                        /* dono kinare se barabar */
+  text-align-last: left !important;           /* last line middle na ho */
+  text-justify: inter-word;                   /* behtar spacing */
+  hyphens: auto;                              /* lambi words pe hyphen allow */
+}
+
+
+</style>
+      
+
+
+       <style>
+
+        /* ---------- responsive footer background ---------- */
+.footerbg {
+  /* background image path — same as before */
+  background-image: url('./images/bgimage1.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;           /* keeps aspect and fills area */
+  width: 100%;
+  box-sizing: border-box;
+  /* use padding to provide vertical space instead of fixed height */
+  padding-top: 60px;                /* space above partner-cta */
+  padding-bottom: 40px;             /* space below footer */
+  position: relative;
+  overflow: hidden;
+}
+
+/* optional: add a subtle overlay so white text stays readable */
+.footerbg::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25); /* tweak darkness (0 = none, 0.5 darker) */
+  pointer-events: none;
+}
+
+/* keep the actual content above the overlay */
+.footerbg > * { position: relative; z-index: 2; }
+
+/* partner cta style (example) */
+.partner-cta { padding: 40px 0 20px; text-align: center; color: #fff; }
+.partner-cta .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+/* cta button adjustments */
+.cta-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  color: rgb(73,176,29);
+  background: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* footer grid layout (responsive) */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin-top: 30px;
+}
+
+/* make logo responsive */
+.footer-logo {
+  width: 125px;
+  height: auto;
+  display: block;
+}
+
+/* small link font default */
+.footer-grid .list a {
+  display: block;
+  font-size: 12.5px;
+  color: #fff; /* tweak if needed */
+  text-decoration: none;
+  margin: 6px 0;
+}
+
+/* bottom bar */
+.bar { margin-top: 20px; color: #ddd; text-align: center; }
+
+/* ------------------ Responsive breakpoints ------------------ */
+
+/* tablets */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .footerbg { padding-top: 50px; padding-bottom: 36px; }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .partner-cta { padding: 28px 0 12px; }
+  .footerbg { padding-top: 40px; padding-bottom: 30px; background-position: center top; }
+  .footer-logo { width: 110px; }
+  .footer-grid .list a { font-size: 12px; }
+}
+
+/* small phones */
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 12px; }
+  .footer-logo { width: 95px; }
+  .footer-grid .list a { font-size: 11px; }
+  .partner-cta h2 { font-size: 18px; }
+  .partner-cta p { font-size: 13px; max-width: 320px; margin: 6px auto 12px; }
+}
+
+
+       </style>
     </main>
 
   </footer>
@@ -3073,9 +3417,152 @@ You’re free to cancel at any time, but once you do, your access to all courses
 
 
   <!-- translate ka js add kar diya hai  -->
+               <script>
+(function(){
+  const ROOT = document.getElementById('vv48');
+  if(!ROOT) return;
 
+  const HOURS    = +ROOT.dataset.hours || 48;          // 48h by default
+  const DURATION = HOURS * 60 * 60 * 1000;
+  const KEY      = (ROOT.id || 'vv48') + '_start_at';  // per-timer key
 
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+  /* ---- storage (localStorage + cookie fallback) ---- */
+  function setStart(t){
+    try{ localStorage.setItem(KEY, String(t)); }
+    catch(e){
+      document.cookie = KEY + '=' + encodeURIComponent(String(t)) +
+        '; max-age=' + Math.ceil(DURATION/1000) + '; path=/; SameSite=Lax';
+    }
+  }
+  function getCookie(name){
+    if(!document.cookie) return null;
+    const parts = document.cookie.split('; ');
+    for(const part of parts){
+      const eq = part.indexOf('=');
+      if(eq < 0) continue;
+      const k = part.slice(0, eq);
+      if(k === name) return decodeURIComponent(part.slice(eq+1));
+    }
+    return null;
+  }
+  function getStart(){
+    try{
+      const v = localStorage.getItem(KEY);
+      if(v !== null) return Number(v);
+    }catch(e){}
+    const c = getCookie(KEY);
+    return c ? Number(c) : null;
+  }
+  function clearStart(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    document.cookie = KEY + '=; max-age=0; path=/; SameSite=Lax';
+  }
+
+  /* ---- first visit wins ---- */
+  let start = getStart();
+  if(!start || isNaN(start)){ start = Date.now(); setStart(start); }
+  const end = start + DURATION;
+
+  /* ---- DOM refs ---- */
+  const dd = ROOT.querySelector('.dd');
+  const hh = ROOT.querySelector('.hh');
+  const mm = ROOT.querySelector('.mm');
+  const ss = ROOT.querySelector('.ss');
+  const pad = n => String(n).padStart(2,'0');
+
+  let tmo;
+  function render(){
+    const now  = Date.now();
+    let left   = Math.max(0, end - now);
+
+    if(left <= 0){
+      // expired UI: show 00s (keeps layout identical)
+      if(dd) dd.textContent = '00';
+      if(hh) hh.textContent = '00';
+      if(mm) mm.textContent = '00';
+      if(ss) ss.textContent = '00';
+      // (optional) auto-reset next lines:
+      // clearStart(); setStart(Date.now()); location.reload();
+      return;
+    }
+
+    const days  = Math.floor(left / 86400000); left -= days  * 86400000;
+    const hours = Math.floor(left / 3600000);  left -= hours * 3600000;
+    const mins  = Math.floor(left / 60000);    left -= mins  * 60000;
+    const secs  = Math.floor(left / 1000);
+
+    if(dd) dd.textContent = pad(days);
+    if(hh) hh.textContent = pad(hours);
+    if(mm) mm.textContent = pad(mins);
+    if(ss) ss.textContent = pad(secs);
+
+    clearTimeout(tmo);
+    tmo = setTimeout(render, 1000 - (Date.now() % 1000) + 2);  // drift-free
+  }
+
+  // cross-tab sync (optional)
+  window.addEventListener('storage', e => { if(e.key === KEY) location.reload(); });
+
+  // testing helper (optional): call from console to reset
+  window.vv48Reset = () => { clearStart(); location.reload(); };
+
+  render();
+})();
+</script>
+   <script src="js/script.js"></script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+(function(){
+  const scroller = document.querySelector('.agri-section');
+  if(!scroller) return;
+
+  const prevBtn = document.querySelector('.agri-prev');
+  const nextBtn = document.querySelector('.agri-next');
+
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+  const vw = () => scroller.clientWidth; // each card = 100% width on mobile
+
+  // Current index from scrollLeft (0,1,2…)
+  const getIndex = () => Math.round(scroller.scrollLeft / vw());
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  // Snap to a specific card
+  const snapTo = (idx, smooth=true) => {
+    const left = idx * vw();
+    scroller.scrollTo({ left, behavior: smooth ? 'smooth' : 'auto' });
+  };
+
+  // On load + on resize (mobile only) → show middle card (index 1)
+  const setInitial = () => {
+    if(!isMobile()) return;
+    // layout settle hone do, then snap
+    requestAnimationFrame(()=> snapTo(1, false));
+  };
+
+  // Arrow handlers
+  if(prevBtn) prevBtn.addEventListener('click', () => {
+    const idx = clamp(getIndex() - 1, 0, 2);
+    snapTo(idx);
+  });
+  if(nextBtn) nextBtn.addEventListener('click', () => {
+    const idx = clamp(getIndex() + 1, 0, 2);
+    snapTo(idx);
+  });
+
+  // When orientation/size changes, keep middle card centered
+  window.addEventListener('resize', () => { if(isMobile()) snapTo(getIndex(), false); });
+
+  // Initial show middle card on mobile
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setInitial);
+  } else {
+    setInitial();
+  }
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js" integrity="sha512-tHvUcUQYi35zApvAa5TNR3fNhBQkVtkmWKfacnpxmix4/VTGz1lGjIVyLMp7gLgAvg+aKJjnVKokXJNS5GZ+/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
